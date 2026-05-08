@@ -35,7 +35,27 @@ A polished static web platform for publishing interactive university math notes.
 
 ## Getting Started
 
-Because the app fetches local Markdown and JSON files, run it through a local web server instead of opening `index.html` directly.
+Because the app fetches local Markdown and JSON files, run it through the included local web server instead of opening `index.html` directly.
+
+```bash
+npm run dev
+```
+
+Then open the same base path used by GitHub Pages:
+
+```text
+http://127.0.0.1:4173/lecture-atlas/
+```
+
+This mirrors the deployed repository URL shape:
+
+```text
+https://rick-btw.github.io/lecture-atlas/
+```
+
+No dependency installation is needed; the script only uses Node's built-in HTTP server APIs.
+
+If you prefer Python for a quick root-only check, this still works, but it does not mirror the GitHub Pages subpath:
 
 ```bash
 python3 -m http.server 8000
@@ -46,8 +66,6 @@ Then open:
 ```text
 http://localhost:8000
 ```
-
-No package installation is needed.
 
 ## Adding a New Note
 
@@ -115,7 +133,7 @@ This project can be deployed as a static site with GitHub Pages.
 4. Set the source to the main branch and the repository root.
 5. Save and wait for GitHub Pages to publish the site.
 
-If you deploy under a repository subpath, review absolute routes such as `/notes/...` and `/assets/...` so they match the final hosted URL.
+The app detects its base path at runtime, so both local root previews and GitHub Pages subpath deployments are supported. The `.nojekyll` file is required so GitHub Pages serves Markdown notes directly instead of converting them into HTML.
 
 ## Tech Stack
 
