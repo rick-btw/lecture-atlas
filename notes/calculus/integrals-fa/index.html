@@ -7,8 +7,9 @@
   </head>
   <body>
     <script>
+      const base = location.pathname.split("/notes/")[0] || "";
       sessionStorage.setItem("lecture-atlas-pending-route", location.pathname);
-      location.replace("/");
+      location.replace(`${base}/`);
     </script>
   </body>
 </html>

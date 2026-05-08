@@ -17,6 +17,7 @@ const editToggle = document.querySelector("[data-edit-toggle]");
 const saveNoteButton = document.querySelector("[data-save-note]");
 const resetNoteButton = document.querySelector("[data-reset-note]");
 const noteRouteLink = document.querySelector("[data-note-route]");
+const appBasePath = getAppBasePath();
 
 const staticArchiveItems = [
   {
@@ -179,9 +180,11 @@ async function initNotes() {
   if (!noteSystem) return;
 
   try {
-    const response = await fetch("notes/manifest.json");
+    const response = await fetch(assetUrl("notes/manifest.json"));
+    if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
     state.manifest = await response.json();
     renderNoteList();
+    rewriteStaticNoteLinks();
     state.searchIndex = [...noteItemsForSearch(), ...staticArchiveItems];
     renderResults(searchInput?.value || "");
     await loadInitialNote();
@@ -199,7 +202,7 @@ function noteItemsForSearch() {
     id: note.id,
     title: note.title,
     meta: `${note.course} · ${note.lecture} · ${note.lecturer}`,
-    href: note.route,
+    href: routeUrl(note.route),
     terms: `${note.tags.join(" ")} ${note.summary}`
   }));
 }
@@ -216,12 +219,19 @@ async function hydrateSearchIndex() {
 function renderNoteList() {
   if (!noteList) return;
   noteList.innerHTML = state.manifest.map((note) => `
-    <a class="note-list-item" href="${note.route}" data-note-link="${note.id}" dir="${note.dir}" lang="${note.language}">
+    <a class="note-list-item" href="${routeUrl(note.route)}" data-note-link="${note.id}" dir="${note.dir}" lang="${note.language}">
       <span>${escapeHtml(note.course)}</span>
       <strong>${escapeHtml(note.title)}</strong>
       <small>${escapeHtml(note.lecture)} · ${escapeHtml(note.semester)}</small>
     </a>
   `).join("");
+}
+
+function rewriteStaticNoteLinks() {
+  document.querySelectorAll("[data-note-link]").forEach((link) => {
+    const note = state.manifest.find((item) => item.id === link.dataset.noteLink);
+    if (note) link.setAttribute("href", routeUrl(note.route));
+  });
 }
 
 async function loadInitialNote() {
@@ -232,7 +242,7 @@ async function loadInitialNote() {
     history.replaceState({}, "", pendingRoute);
   }
 
-  const route = normalizeRoute(decodeURIComponent(window.location.pathname));
+  const route = routeFromPath(decodeURIComponent(window.location.pathname));
   const hashId = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("note");
   const routed = state.manifest.find((note) => normalizeRoute(note.route) === route);
   const byHash = state.manifest.find((note) => note.id === hashId);
@@ -242,8 +252,8 @@ async function loadInitialNote() {
 async function navigateToNote(id, pushRoute = true) {
   const note = state.manifest.find((item) => item.id === id);
   if (!note) return;
-  if (pushRoute && window.location.pathname !== note.route) {
-    history.pushState({ noteId: note.id }, "", note.route);
+  if (pushRoute && routeFromPath(window.location.pathname) !== normalizeRoute(note.route)) {
+    history.pushState({ noteId: note.id }, "", routeUrl(note.route));
   }
   await loadNote(note.id, true);
 }
@@ -256,7 +266,20 @@ async function loadNote(id, shouldScroll = false) {
   state.editMode = false;
   setEditorVisibility(false);
 
-  const source = await getNoteSource(note);
+  let source;
+  try {
+    source = await getNoteSource(note);
+  } catch (error) {
+    updateActiveNoteChrome(note);
+    noteContent.innerHTML = `
+      <div class="academic-box warning">
+        <strong>Warning.</strong>
+        This note could not be loaded. Check that the Markdown file exists under the deployed site path.
+      </div>
+    `;
+    return;
+  }
+
   const savedSource = localStorage.getItem(noteStorageKey(note)) || localStorage.getItem(oldNoteStorageKey(note));
   state.activeSource = savedSource || source;
   renderActiveNote(state.activeSource);
@@ -269,8 +292,12 @@ async function loadNote(id, shouldScroll = false) {
 
 async function getNoteSource(note) {
   if (state.noteBodies.has(note.id)) return state.noteBodies.get(note.id);
-  const response = await fetch(note.path);
+  const response = await fetch(assetUrl(note.path));
+  if (!response.ok) throw new Error(`Note request failed: ${response.status}`);
   const source = await response.text();
+  if (/^\s*<!doctype html/i.test(source) || /^\s*<html[\s>]/i.test(source)) {
+    throw new Error("Expected Markdown but received HTML.");
+  }
   state.noteBodies.set(note.id, source);
   return source;
 }
@@ -282,7 +309,7 @@ function updateActiveNoteChrome(note) {
   dynamicNote.setAttribute("dir", note.dir);
   dynamicNote.setAttribute("lang", note.language);
   dynamicNote.classList.toggle("persian-note", note.dir === "rtl");
-  noteRouteLink.href = note.route;
+  noteRouteLink.href = routeUrl(note.route);
   noteRouteLink.dataset.noteLink = note.id;
   document.querySelectorAll("[data-note-link]").forEach((link) => {
     link.classList.toggle("active", link.dataset.noteLink === note.id);
@@ -494,6 +521,33 @@ function slugify(text) {
 
 function normalizeSearch(value) {
   return value.toLowerCase().replace(/ي/g, "ی").replace(/ك/g, "ک").trim();
+}
+
+function getAppBasePath() {
+  const script = document.querySelector('script[src$="js/main.js"]');
+  const source = script?.getAttribute("src") || "js/main.js";
+  const scriptUrl = new URL(source, window.location.href);
+  return scriptUrl.pathname.replace(/js\/main\.js$/, "");
+}
+
+function assetUrl(path) {
+  return new URL(path.replace(/^\/+/, ""), `${window.location.origin}${appBasePath}`).toString();
+}
+
+function routeUrl(route) {
+  const base = appBasePath.replace(/\/$/, "");
+  const cleanRoute = route.startsWith("/") ? route : `/${route}`;
+  return `${base}${cleanRoute}`;
+}
+
+function routeFromPath(pathname) {
+  const normalizedPath = normalizeRoute(pathname);
+  const base = normalizeRoute(appBasePath);
+  if (base && base !== "/" && normalizedPath.startsWith(`${base}/`)) {
+    return normalizeRoute(normalizedPath.slice(base.length));
+  }
+  if (base && base !== "/" && normalizedPath === base) return "/";
+  return normalizedPath;
 }
 
 function normalizeRoute(route) {
