@@ -14,6 +14,7 @@ const notePreview = document.querySelector("[data-note-preview]");
 const noteEditor = document.querySelector("[data-note-editor]");
 const editorShell = document.querySelector("[data-editor-shell]");
 const editToggle = document.querySelector("[data-edit-toggle]");
+const fullscreenToggle = document.querySelector("[data-fullscreen-toggle]");
 const saveNoteButton = document.querySelector("[data-save-note]");
 const resetNoteButton = document.querySelector("[data-reset-note]");
 const noteRouteLink = document.querySelector("[data-note-route]");
@@ -340,6 +341,45 @@ function setEditorVisibility(isVisible) {
   saveNoteButton.hidden = !isVisible;
   resetNoteButton.hidden = !isVisible;
   editToggle.textContent = isVisible ? "View Note" : "Edit Note";
+
+  if (isVisible) {
+    updatePreviewFromEditor();
+    requestAnimationFrame(() => {
+      editorShell.scrollIntoView({ behavior: "smooth", block: "start" });
+      noteEditor?.focus({ preventScroll: true });
+    });
+  }
+}
+
+async function toggleNoteFullscreen() {
+  if (!dynamicNote || !fullscreenToggle) return;
+
+  if (document.fullscreenElement === dynamicNote) {
+    await document.exitFullscreen();
+    return;
+  }
+
+  if (document.fullscreenElement) {
+    await document.exitFullscreen();
+  }
+
+  try {
+    await dynamicNote.requestFullscreen();
+  } catch (error) {
+    setNoteFullscreen(!dynamicNote.classList.contains("is-fullscreen"));
+  }
+}
+
+function setNoteFullscreen(isFullscreen) {
+  if (!dynamicNote || !fullscreenToggle) return;
+  dynamicNote.classList.toggle("is-fullscreen", isFullscreen);
+  document.body.classList.toggle("note-focus-active", isFullscreen);
+  fullscreenToggle.textContent = isFullscreen ? "Exit Fullscreen" : "Fullscreen";
+  fullscreenToggle.classList.toggle("active", isFullscreen);
+}
+
+function syncFullscreenState() {
+  setNoteFullscreen(document.fullscreenElement === dynamicNote);
 }
 
 function updatePreviewFromEditor() {
@@ -599,9 +639,9 @@ document.addEventListener("click", (event) => {
 
   if (event.target.closest("[data-edit-toggle]")) {
     setEditorVisibility(!state.editMode);
-    if (state.editMode) updatePreviewFromEditor();
   }
 
+  if (event.target.closest("[data-fullscreen-toggle]")) toggleNoteFullscreen();
   if (event.target.closest("[data-save-note]")) saveActiveNote();
   if (event.target.closest("[data-reset-note]")) resetActiveNote();
 });
@@ -616,6 +656,9 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeSearch();
     closeSidebar();
+    if (dynamicNote?.classList.contains("is-fullscreen") && !document.fullscreenElement) {
+      setNoteFullscreen(false);
+    }
   }
 });
 
@@ -625,6 +668,7 @@ document.querySelectorAll("[data-dir-set]").forEach((button) => {
 
 searchInput?.addEventListener("input", () => renderResults(searchInput.value));
 noteEditor?.addEventListener("input", updatePreviewFromEditor);
+document.addEventListener("fullscreenchange", syncFullscreenState);
 window.addEventListener("popstate", () => loadInitialNote());
 window.addEventListener("scroll", updateScrollState, { passive: true });
 window.addEventListener("resize", updateScrollState);
