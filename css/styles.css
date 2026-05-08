@@ -52,6 +52,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -1031,6 +1035,47 @@ pre code {
   background: var(--bg-solid);
   box-shadow: var(--shadow-soft);
   scroll-margin-top: calc(var(--header-h) + 18px);
+}
+
+body.note-focus-active {
+  overflow: hidden;
+}
+
+.note-reader.is-fullscreen,
+.note-reader:fullscreen {
+  position: fixed;
+  inset: 14px;
+  z-index: 1200;
+  width: auto;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  overflow: auto;
+  border-radius: var(--radius-lg);
+  background: var(--bg-solid);
+  box-shadow: var(--shadow);
+}
+
+.note-reader:fullscreen {
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.note-reader::backdrop {
+  background: color-mix(in srgb, var(--bg) 86%, rgba(0, 0, 0, 0.52));
+}
+
+.note-reader.is-fullscreen .note-title,
+.note-reader:fullscreen .note-title {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  margin-inline: calc(clamp(24px, 5vw, 54px) * -1);
+  padding-inline: clamp(24px, 5vw, 54px);
+  background: color-mix(in srgb, var(--bg-solid) 92%, transparent);
+  backdrop-filter: blur(18px) saturate(1.08);
 }
 
 .lecture-note + .lecture-note {
