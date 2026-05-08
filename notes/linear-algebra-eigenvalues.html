@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eigenvalues and Diagonalization · Lecture Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&family=Crimson+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body class="note-page">
+    <main class="standalone-note">
+      <a class="back-link" href="../index.html#reader">Back to archive</a>
+      <article class="lecture-note">
+        <header class="note-title">
+          <div>
+            <p>Linear Algebra · Lecture 9</p>
+            <h1>Eigenvalues and Diagonalization</h1>
+          </div>
+        </header>
+        <p class="lead">Diagonalization reveals the coordinate system in which a linear transformation acts by independent scaling.</p>
+        <div class="academic-box definition">
+          <strong>Definition.</strong>
+          A nonzero vector \(v\) is an eigenvector of \(A\) if \(Av=\lambda v\) for some scalar \(\lambda\).
+        </div>
+        <p>\[
+          \det(A-\lambda I)=0
+        \]</p>
+        <div class="academic-box lemma">
+          <strong>Lemma.</strong>
+          Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+        </div>
+        <pre><code>matrix = [[2, 1], [0, 3]]
+characteristic = "(2-lambda)(3-lambda)"</code></pre>
+      </article>
+    </main>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script defer src="../js/main.js"></script>
+  </body>
+</html>

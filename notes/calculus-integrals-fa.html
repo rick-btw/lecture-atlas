@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>انتگرال معین · Lecture Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&family=Crimson+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body class="note-page">
+    <main class="standalone-note">
+      <a class="back-link" href="../index.html#reader">بازگشت به آرشیو</a>
+      <article class="lecture-note persian-note">
+        <header class="note-title">
+          <div>
+            <p>حسابان ۱ · جلسه ۱۱</p>
+            <h1>انتگرال معین و قضیه اساسی حسابان</h1>
+          </div>
+        </header>
+        <p class="lead">انتگرال معین مساحت جهت‌دار زیر نمودار را توصیف می‌کند و پلی میان جمع‌های ریمانی و مشتق‌گیری می‌سازد.</p>
+        <h2>تعریف</h2>
+        <div class="academic-box definition">
+          <strong>تعریف.</strong>
+          اگر حد جمع‌های ریمانی وجود داشته باشد، آن را انتگرال معین تابع \(f\) روی بازه \([a,b]\) می‌نامیم.
+        </div>
+        <p>\[
+          \int_a^b f(x)\,dx =
+          \lim_{n\to\infty}\sum_{k=1}^{n} f(x_k^*)\Delta x
+        \]</p>
+        <div class="academic-box theorem">
+          <strong>قضیه.</strong>
+          اگر \( f \) روی \([a,b]\) پیوسته باشد و \( F(x)=\int_a^x f(t)\,dt \)، آنگاه \(F'(x)=f(x)\).
+        </div>
+        <div class="academic-box exercise">
+          <strong>تمرین.</strong>
+          مشتق عبارت \( \int_0^{\sin x} e^{-t^2}\,dt \) را محاسبه کنید.
+        </div>
+      </article>
+    </main>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script defer src="../js/main.js"></script>
+  </body>
+</html>

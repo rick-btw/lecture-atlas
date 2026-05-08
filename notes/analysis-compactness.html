@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compactness in Metric Spaces · Lecture Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&family=Crimson+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body class="note-page">
+    <main class="standalone-note">
+      <a class="back-link" href="../index.html#reader">Back to archive</a>
+      <article class="lecture-note">
+        <header class="note-title">
+          <div>
+            <p>Mathematical Analysis · Lecture 7</p>
+            <h1>Compactness in Metric Spaces</h1>
+          </div>
+        </header>
+        <p class="lead">Compactness is the mechanism that turns infinitely many local statements into finitely many global statements.</p>
+        <h2>Open Cover Definition</h2>
+        <div class="academic-box definition">
+          <strong>Definition.</strong>
+          A metric space \(K\) is compact if every open cover \( \{U_\alpha\}_{\alpha \in A} \) has a finite subcover.
+        </div>
+        <h2>Sequential Form</h2>
+        <div class="academic-box theorem">
+          <strong>Theorem.</strong>
+          In \( \mathbb{R}^n \), compactness is equivalent to being closed and bounded.
+        </div>
+        <p>\[
+          (x_n) \subset K \quad \Longrightarrow \quad \exists (x_{n_j}) \text{ with } x_{n_j}\to x \in K.
+        \]</p>
+        <div class="academic-box proof">
+          <strong>Proof.</strong>
+          Boundedness gives a convergent subsequence by Bolzano-Weierstrass. Closedness keeps the limit in \(K\). The cover formulation follows by contradiction using a sequence without finite coverage.
+        </div>
+      </article>
+    </main>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script defer src="../js/main.js"></script>
+  </body>
+</html>

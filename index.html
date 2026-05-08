@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Lecture Atlas is a premium digital academic archive for mathematical notes, proofs, and university lectures.">
+    <meta name="application-name" content="Lecture Atlas">
+    <title>Lecture Atlas</title>
+    <link rel="icon" href="assets/sbu-logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&family=Crimson+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+    <header class="site-header" data-header>
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="Lecture Atlas home">
+          <span class="brand-mark university-mark">
+            <img src="assets/sbu-logo.svg" alt="" aria-hidden="true">
+          </span>
+          <span>
+            <strong>Lecture Atlas</strong>
+            <small>SBU Faculty of Mathematical Sciences</small>
+          </span>
+        </a>
+
+        <div class="topbar-links">
+          <a href="#courses">Courses</a>
+          <a href="#archive">Archive</a>
+          <a href="#reader">Reader</a>
+          <a href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">فارسی</a>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-button search-trigger" type="button" data-search-open aria-label="Open search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.2-4.2m1.2-5.3a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"></path></svg>
+            <span class="shortcut">⌘K</span>
+          </button>
+          <button class="icon-button" type="button" data-theme-toggle aria-label="Toggle dark mode">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V2m0 20v-2m8-8h2M2 12h2m14.36-6.36 1.42-1.42M4.22 19.78l1.42-1.42m12.72 0 1.42 1.42M4.22 4.22l1.42 1.42M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"></path></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.8 8.8 0 1 0 11 11Z"></path></svg>
+          </button>
+          <button class="icon-button mobile-menu-button" type="button" data-mobile-open aria-label="Open navigation">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mobile-backdrop" data-mobile-backdrop></div>
+
+    <aside class="sidebar" data-sidebar aria-label="Lecture Atlas navigation">
+      <div class="sidebar-header">
+        <button class="icon-button" type="button" data-sidebar-toggle aria-label="Collapse sidebar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+        </button>
+        <span>Atlas Map</span>
+      </div>
+
+      <div class="sidebar-scroll">
+        <section class="nav-group">
+          <h2>Faculty</h2>
+            <a class="nav-item active" href="#reader"><span>Mathematics</span><small>42</small></a>
+          <a class="nav-item" href="#physics"><span>Physics</span><small>18</small></a>
+          <a class="nav-item" href="#engineering"><span>Engineering</span><small>25</small></a>
+        </section>
+
+        <section class="nav-group">
+          <h2>Department</h2>
+          <details open>
+            <summary>Pure Mathematics</summary>
+            <a href="/notes/analysis/uniform-convergence" data-note-link="analysis-uniform-convergence">Mathematical Analysis</a>
+            <a href="/notes/linear-algebra/spectral-theorem" data-note-link="linear-algebra-spectral-theorem">Linear Algebra</a>
+            <a href="#topology-preview">Topology</a>
+          </details>
+          <details>
+            <summary>Applied Mathematics</summary>
+            <a href="#courses">Differential Equations</a>
+            <a href="#probability-preview">Probability</a>
+          </details>
+        </section>
+
+        <section class="nav-group">
+          <h2>Semester</h2>
+          <a class="nav-pill" href="#courses">Fall 2026</a>
+          <a class="nav-pill" href="#recent">Spring 2026</a>
+          <a class="nav-pill" href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">Persian Collection</a>
+        </section>
+
+        <section class="nav-group archive-credit" aria-label="Archive credit">
+          <h2>Studio</h2>
+          <div class="credit-card">
+            <img src="assets/sbu-logo.svg" alt="" aria-hidden="true">
+            <span>
+              <strong>Amirali Saket</strong>
+              <small>Academic archive design</small>
+            </span>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <main id="main">
+      <section id="home" class="hero section-band">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Lecture Atlas · Digital Academic Archive</p>
+            <h1>Lecture notes that read like published academic work.</h1>
+            <p class="hero-lede">
+              A polished bilingual archive for analysis, calculus, linear algebra, physics, and engineering lectures with readable proofs, rendered notation, and calm organization.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#archive">
+                <span>Explore Notes</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+              </a>
+              <button class="button ghost" type="button" data-search-open>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.2-4.2m1.2-5.3a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"></path></svg>
+                <span>Search atlas</span>
+              </button>
+            </div>
+            <div class="metric-row" aria-label="Archive statistics">
+              <span><strong>128</strong> lectures</span>
+              <span><strong>2</strong> languages</span>
+              <span><strong>640+</strong> equations</span>
+            </div>
+          </div>
+
+          <div class="hero-preview reveal delay-1" aria-label="Lecture note preview">
+            <div class="preview-window">
+              <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="preview-toolbar">
+                <span>Analysis II</span>
+                <span>Lecture 07</span>
+              </div>
+              <article class="mini-note">
+                <p class="mini-kicker">Compactness</p>
+                <h2>Uniform continuity on compact sets</h2>
+                <p>
+                  If \( f: K \to \mathbb{R} \) is continuous and \( K \) is compact, then for every \( \varepsilon > 0 \) there exists \( \delta > 0 \).
+                </p>
+                <div class="mini-theorem">
+                  <strong>Theorem.</strong>
+                  \( x_n \to x \Rightarrow f(x_n) \to f(x) \)
+                </div>
+                <pre><code>for epsilon in neighborhoods:
+    choose finite_subcover(K)</code></pre>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="courses" class="section-band courses-section">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Featured Courses</p>
+            <h2>Organized for the way students actually study.</h2>
+            <p>Every course card keeps semester, lecturer, notes, and tags close enough to scan without feeling crowded.</p>
+          </div>
+
+          <div class="course-grid">
+            <article class="course-card reveal" data-course="Calculus I Fall 2026 Dr Sarah Bennett limits derivatives integrals">
+              <span class="course-code">MATH 101</span>
+              <h3>Calculus I</h3>
+              <p>Limits, continuity, differentiation, optimization, and the first integral techniques.</p>
+              <dl>
+                <div><dt>Semester</dt><dd>Fall 2026</dd></div>
+                <div><dt>Lecturer</dt><dd>Dr. Sarah Bennett</dd></div>
+                <div><dt>Notes</dt><dd>14 lectures</dd></div>
+              </dl>
+              <div class="tags"><span>Limits</span><span>Derivatives</span><span>Integrals</span></div>
+            </article>
+
+            <article class="course-card reveal delay-1" data-course="Mathematical Analysis Spring 2026 Prof Daniel Hart compactness sequences continuity">
+              <span class="course-code">MATH 301</span>
+              <h3>Mathematical Analysis</h3>
+              <p>Metric spaces, compactness, uniform convergence, and rigorous proof methods.</p>
+              <dl>
+                <div><dt>Semester</dt><dd>Spring 2026</dd></div>
+                <div><dt>Lecturer</dt><dd>Prof. Daniel Hart</dd></div>
+                <div><dt>Notes</dt><dd>18 lectures</dd></div>
+              </dl>
+              <div class="tags"><span>Proofs</span><span>Compactness</span><span>Series</span></div>
+            </article>
+
+            <article class="course-card reveal delay-2" data-course="Linear Algebra Fall 2026 Dr Mina Farzan vector spaces eigenvalues matrices">
+              <span class="course-code">MATH 204</span>
+              <h3>Linear Algebra</h3>
+              <p>Vector spaces, bases, determinants, inner products, eigenvalues, and diagonalization.</p>
+              <dl>
+                <div><dt>Semester</dt><dd>Fall 2026</dd></div>
+                <div><dt>Lecturer</dt><dd>Dr. Mina Farzan</dd></div>
+                <div><dt>Notes</dt><dd>16 lectures</dd></div>
+              </dl>
+              <div class="tags"><span>Matrices</span><span>Eigenvalues</span><span>Spaces</span></div>
+            </article>
+
+            <article class="course-card reveal" data-course="Differential Equations Spring 2026 Dr Omar Lee systems laplace stability">
+              <span class="course-code">MATH 252</span>
+              <h3>Differential Equations</h3>
+              <p>First-order equations, systems, Laplace transforms, stability, and modeling.</p>
+              <dl>
+                <div><dt>Semester</dt><dd>Spring 2026</dd></div>
+                <div><dt>Lecturer</dt><dd>Dr. Omar Lee</dd></div>
+                <div><dt>Notes</dt><dd>12 lectures</dd></div>
+              </dl>
+              <div class="tags"><span>ODE</span><span>Laplace</span><span>Stability</span></div>
+            </article>
+
+            <article id="physics" class="course-card reveal delay-1" data-course="Physics Mechanics Fall 2026 Prof Elena Ward oscillations energy motion">
+              <span class="course-code">PHYS 201</span>
+              <h3>Physics</h3>
+              <p>Mechanics and waves with mathematical notes for engineering and physics majors.</p>
+              <dl>
+                <div><dt>Semester</dt><dd>Fall 2026</dd></div>
+                <div><dt>Lecturer</dt><dd>Prof. Elena Ward</dd></div>
+                <div><dt>Notes</dt><dd>10 lectures</dd></div>
+              </dl>
+              <div class="tags"><span>Mechanics</span><span>Energy</span><span>Waves</span></div>
+            </article>
+
+            <article id="probability-preview" class="course-card reveal delay-2" data-course="Probability Spring 2026 Dr Nima Amini random variables distributions expectation">
+              <span class="course-code">STAT 210</span>
+              <h3>Probability</h3>
+              <p>Random variables, distributions, expectation, convergence, and applied examples.</p>
+              <dl>
+                <div><dt>Semester</dt><dd>Spring 2026</dd></div>
+                <div><dt>Lecturer</dt><dd>Dr. Nima Amini</dd></div>
+                <div><dt>Notes</dt><dd>13 lectures</dd></div>
+              </dl>
+              <div class="tags"><span>Randomness</span><span>Expectation</span><span>Bayes</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="recent" class="section-band recent-section">
+        <div class="container two-column">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Recent Uploads</p>
+            <h2>Fresh lectures, proofs, and problem sets.</h2>
+          </div>
+          <div class="upload-list reveal delay-1">
+            <a class="upload-row" href="/notes/analysis/uniform-convergence" data-note-link="analysis-uniform-convergence">
+              <span>Analysis II</span>
+              <strong>Uniform convergence and continuity</strong>
+              <time datetime="2026-05-04">May 4, 2026</time>
+            </a>
+            <a class="upload-row" href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa" dir="rtl" lang="fa">
+              <span>حسابان ۱</span>
+              <strong>انتگرال معین و تعبیر هندسی</strong>
+              <time datetime="2026-04-29">۲۹ آوریل ۲۰۲۶</time>
+            </a>
+            <a class="upload-row" href="/notes/linear-algebra/spectral-theorem" data-note-link="linear-algebra-spectral-theorem">
+              <span>Linear Algebra</span>
+              <strong>Orthogonality and the spectral theorem</strong>
+              <time datetime="2026-04-24">Apr 24, 2026</time>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="archive" class="archive-shell">
+        <div class="container archive-layout">
+          <aside class="toc-card" aria-label="Page table of contents">
+            <p>On this page</p>
+            <a href="/notes/analysis/uniform-convergence" data-note-link="analysis-uniform-convergence">Analysis</a>
+            <a href="/notes/calculus/lecture-1" data-note-link="calculus-lecture-1">Calculus</a>
+            <a href="/notes/linear-algebra/spectral-theorem" data-note-link="linear-algebra-spectral-theorem">Linear Algebra</a>
+            <a href="#courses">Differential Equations</a>
+            <a href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">Persian RTL</a>
+          </aside>
+
+          <section id="reader" class="reader">
+            <div class="reader-header reveal">
+              <div>
+                <p class="eyebrow">Lecture Atlas Viewer</p>
+                <h2>Readable proofs, navigable sections, rendered mathematics.</h2>
+              </div>
+              <div class="reader-controls" aria-label="Reader controls">
+                <button class="segmented active" type="button" data-dir-set="ltr">EN</button>
+                <button class="segmented" type="button" data-dir-set="rtl">FA</button>
+              </div>
+            </div>
+
+            <div class="note-system reveal" data-note-system>
+              <aside class="note-library" aria-label="Dynamic note library">
+                <p>Note Library</p>
+                <div class="note-list" data-note-list>
+                  <div class="skeleton"></div>
+                  <div class="skeleton"></div>
+                  <div class="skeleton"></div>
+                </div>
+              </aside>
+
+              <article id="dynamic-note" class="lecture-note note-reader" data-dynamic-note data-note>
+                <header class="note-title">
+                  <div>
+                    <p data-note-meta>Loading note...</p>
+                    <h2 data-note-title>Mathematical lecture note</h2>
+                  </div>
+                  <div class="note-actions">
+                    <button class="segmented" type="button" data-edit-toggle>Edit Note</button>
+                    <button class="segmented" type="button" data-save-note hidden>Save</button>
+                    <button class="segmented" type="button" data-reset-note hidden>Reset</button>
+                    <a data-note-route href="/notes/analysis/uniform-convergence">Open route</a>
+                  </div>
+                </header>
+
+                <p class="lead" data-note-summary>Loading LaTeX-powered academic content from the notes folder.</p>
+
+                <div class="note-editor-shell" data-editor-shell hidden>
+                  <div class="editor-pane">
+                    <label for="noteEditor">Markdown + LaTeX source</label>
+                    <textarea id="noteEditor" data-note-editor spellcheck="false"></textarea>
+                  </div>
+                  <div class="preview-pane">
+                    <p>Live Preview</p>
+                    <div class="note-content" data-note-preview></div>
+                  </div>
+                </div>
+
+                <div class="note-content" data-note-content aria-live="polite"></div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>Lecture Atlas</strong>
+          <p>Mathematics & academic notes platform for bilingual study.</p>
+        </div>
+        <div class="footer-credit" aria-label="Project credit">
+          <img src="assets/sbu-logo.svg" alt="" aria-hidden="true">
+          <span>Crafted by <strong>Amirali Saket</strong></span>
+        </div>
+        <a href="#home">Back to top</a>
+      </div>
+    </footer>
+
+    <div class="search-modal" data-search-modal aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+        <div class="search-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.2-4.2m1.2-5.3a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"></path></svg>
+          <input id="searchInput" type="search" placeholder="Search courses, lectures, theorems..." autocomplete="off">
+          <button type="button" data-search-close aria-label="Close search">Esc</button>
+        </div>
+        <h2 id="searchTitle">Search Lecture Atlas</h2>
+        <div class="recent-searches" aria-label="Recent searches">
+          <button type="button">compactness</button>
+          <button type="button">eigenvalues</button>
+          <button type="button">انتگرال</button>
+        </div>
+        <div class="search-results" data-search-results></div>
+      </div>
+    </div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script defer src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Linear First-Order Equations · Lecture Atlas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&family=Crimson+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body class="note-page">
+    <main class="standalone-note">
+      <a class="back-link" href="../index.html#reader">Back to archive</a>
+      <article class="lecture-note">
+        <header class="note-title">
+          <div>
+            <p>Differential Equations · Lecture 4</p>
+            <h1>Linear First-Order Equations</h1>
+          </div>
+        </header>
+        <p class="lead">The integrating factor method turns a non-exact expression into a single derivative.</p>
+        <div class="academic-box definition">
+          <strong>Standard form.</strong>
+          \( y' + p(x)y = q(x) \)
+        </div>
+        <p>\[
+          \mu(x)=e^{\int p(x)\,dx}, \qquad
+          y(x)=\frac{1}{\mu(x)}\left(\int \mu(x)q(x)\,dx+C\right).
+        \]</p>
+        <div class="academic-box warning">
+          <strong>Warning.</strong>
+          Normalize the equation before computing the integrating factor.
+        </div>
+      </article>
+    </main>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script defer src="../js/main.js"></script>
+  </body>
+</html>

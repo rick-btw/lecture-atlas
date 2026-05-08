@@ -1,0 +1,58 @@
+[
+  {
+    "id": "analysis-uniform-convergence",
+    "course": "Mathematical Analysis",
+    "lecture": "Lecture 8",
+    "title": "Uniform Convergence and Continuity",
+    "lecturer": "Prof. Daniel Hart",
+    "semester": "Spring 2026",
+    "language": "en",
+    "dir": "ltr",
+    "path": "notes/analysis/uniform-convergence.md",
+    "route": "/notes/analysis/uniform-convergence",
+    "tags": ["analysis", "uniform convergence", "continuity", "series"],
+    "summary": "A rigorous treatment of uniform convergence, interchange of limits, and continuity of limit functions."
+  },
+  {
+    "id": "calculus-lecture-1",
+    "course": "Calculus I",
+    "lecture": "Lecture 1",
+    "title": "Limits, Continuity, and the Derivative",
+    "lecturer": "Dr. Sarah Bennett",
+    "semester": "Fall 2026",
+    "language": "en",
+    "dir": "ltr",
+    "path": "notes/calculus/lecture-1.md",
+    "route": "/notes/calculus/lecture-1",
+    "tags": ["calculus", "limits", "continuity", "derivatives"],
+    "summary": "Foundational notes on limits, continuity, and the derivative as a local linear model."
+  },
+  {
+    "id": "linear-algebra-spectral-theorem",
+    "course": "Linear Algebra",
+    "lecture": "Lecture 12",
+    "title": "Orthogonality and the Spectral Theorem",
+    "lecturer": "Dr. Mina Farzan",
+    "semester": "Fall 2026",
+    "language": "en",
+    "dir": "ltr",
+    "path": "notes/linear-algebra/spectral-theorem.md",
+    "route": "/notes/linear-algebra/spectral-theorem",
+    "tags": ["linear algebra", "orthogonality", "matrices", "eigenvalues"],
+    "summary": "Symmetric matrices, orthonormal bases, diagonalization, and matrix factorizations."
+  },
+  {
+    "id": "calculus-integrals-fa",
+    "course": "حسابان ۱",
+    "lecture": "جلسه ۱۱",
+    "title": "انتگرال معین و قضیه اساسی حسابان",
+    "lecturer": "دکتر سارا بنت",
+    "semester": "پاییز ۲۰۲۶",
+    "language": "fa",
+    "dir": "rtl",
+    "path": "notes/calculus/integrals-fa.md",
+    "route": "/notes/calculus/integrals-fa",
+    "tags": ["فارسی", "حسابان", "انتگرال", "قضیه اساسی"],
+    "summary": "یادداشت فارسی درباره انتگرال معین، جمع ریمانی و قضیه اساسی حسابان."
+  }
+]
