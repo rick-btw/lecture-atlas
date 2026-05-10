@@ -66,9 +66,12 @@
       <div class="sidebar-scroll">
         <section class="nav-group">
           <h2>Faculty</h2>
+          <details open>
+            <summary>Faculties</summary>
             <a class="nav-item active" href="#reader"><span>Mathematics</span><small>42</small></a>
-          <a class="nav-item" href="#physics"><span>Physics</span><small>18</small></a>
-          <a class="nav-item" href="#engineering"><span>Engineering</span><small>25</small></a>
+            <a class="nav-item" href="#physics"><span>Physics</span><small>18</small></a>
+            <a class="nav-item" href="#engineering"><span>Engineering</span><small>25</small></a>
+          </details>
         </section>
 
         <section class="nav-group">
@@ -88,9 +91,12 @@
 
         <section class="nav-group">
           <h2>Semester</h2>
-          <a class="nav-pill" href="#courses">Fall 2026</a>
-          <a class="nav-pill" href="#recent">Spring 2026</a>
-          <a class="nav-pill" href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">Persian Collection</a>
+          <details open>
+            <summary>Collections</summary>
+            <a class="nav-pill" href="#courses">Fall 2026</a>
+            <a class="nav-pill" href="#recent">Spring 2026</a>
+            <a class="nav-pill" href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">Persian Collection</a>
+          </details>
         </section>
 
         <section class="nav-group archive-credit" aria-label="Archive credit">
@@ -179,14 +185,14 @@
               <div class="tags"><span>Limits</span><span>Derivatives</span><span>Integrals</span></div>
             </article>
 
-            <article class="course-card reveal delay-1" data-course="Mathematical Analysis Spring 2026 Prof Daniel Hart compactness sequences continuity">
+            <article class="course-card reveal delay-1" data-course="Mathematical Analysis Spring 2026 Dr Bijan Ahmadi compactness sequences continuity">
               <span class="course-code">MATH 301</span>
               <h3>Mathematical Analysis</h3>
               <p>Metric spaces, compactness, uniform convergence, and rigorous proof methods.</p>
               <dl>
                 <div><dt>Semester</dt><dd>Spring 2026</dd></div>
-                <div><dt>Lecturer</dt><dd>Prof. Daniel Hart</dd></div>
-                <div><dt>Notes</dt><dd>18 lectures</dd></div>
+                <div><dt>Lecturer</dt><dd>Dr. Bijan Ahmadi</dd></div>
+                <div><dt>Notes</dt><dd>0 lectures</dd></div>
               </dl>
               <div class="tags"><span>Proofs</span><span>Compactness</span><span>Series</span></div>
             </article>
@@ -293,7 +299,10 @@
 
             <div class="note-system reveal" data-note-system>
               <aside class="note-library" aria-label="Dynamic note library">
-                <p>Note Library</p>
+                <div class="note-library-head">
+                  <p>Note Library</p>
+                  <button class="segmented add-note-button" type="button" data-add-note>Add Note</button>
+                </div>
                 <div class="note-list" data-note-list>
                   <div class="skeleton"></div>
                   <div class="skeleton"></div>
