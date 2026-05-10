@@ -1061,20 +1061,36 @@ body.note-focus-active {
   overflow: hidden;
 }
 
+body.note-focus-active .site-header,
+body.note-focus-active .sidebar,
+body.note-focus-active .toc-card,
+body.note-focus-active .reader-header,
+body.note-focus-active .note-library,
+body.note-focus-active .site-footer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.note-focus-active .note-system {
+  transform: none !important;
+}
+
 .note-reader.is-fullscreen,
 .note-reader:fullscreen {
   position: fixed;
-  inset: 14px;
-  z-index: 1200;
+  inset: 0;
+  z-index: 5000;
   width: auto;
   max-width: none;
   height: auto;
   max-height: none;
   margin: 0;
   overflow: auto;
-  border-radius: var(--radius-lg);
+  border: 0;
+  border-radius: 0;
   background: var(--bg-solid);
   box-shadow: var(--shadow);
+  padding: 34px clamp(28px, 5vw, 72px) 80px;
 }
 
 .note-reader:fullscreen {
@@ -1089,13 +1105,34 @@ body.note-focus-active {
 
 .note-reader.is-fullscreen .note-title,
 .note-reader:fullscreen .note-title {
-  position: sticky;
-  inset-block-start: 0;
-  z-index: 2;
-  margin-inline: calc(clamp(24px, 5vw, 54px) * -1);
-  padding-inline: clamp(24px, 5vw, 54px);
-  background: color-mix(in srgb, var(--bg-solid) 92%, transparent);
-  backdrop-filter: blur(18px) saturate(1.08);
+  position: static;
+  margin-inline: 0;
+  padding-inline: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.note-reader.is-fullscreen .note-editor-shell,
+.note-reader:fullscreen .note-editor-shell {
+  min-height: calc(100vh - 220px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.note-reader.is-fullscreen .note-content,
+.note-reader:fullscreen .note-content,
+.note-reader.is-fullscreen .lead,
+.note-reader:fullscreen .lead {
+  max-width: 860px;
+}
+
+.note-reader.is-fullscreen .editor-pane textarea,
+.note-reader:fullscreen .editor-pane textarea {
+  min-height: calc(100vh - 260px);
+}
+
+.note-reader.is-fullscreen .preview-pane,
+.note-reader:fullscreen .preview-pane {
+  max-height: calc(100vh - 260px);
 }
 
 .note-reader {
