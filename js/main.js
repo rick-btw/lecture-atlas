@@ -41,6 +41,7 @@ const state = {
   searchIndex: [...staticArchiveItems],
   activeNote: null,
   activeSource: "",
+  draftCounter: Number.parseInt(localStorage.getItem("lecture-atlas-draft-count") || "0", 10),
   editMode: false
 };
 
@@ -228,6 +229,54 @@ function renderNoteList() {
   `).join("");
 }
 
+function createNewNoteDraft() {
+  state.draftCounter += 1;
+  localStorage.setItem("lecture-atlas-draft-count", String(state.draftCounter));
+
+  const draftNote = {
+    id: `draft-${Date.now()}`,
+    course: "New Note",
+    lecture: `Draft ${state.draftCounter}`,
+    title: "Untitled Lecture Note",
+    lecturer: "Amirali Saket",
+    semester: "Local Draft",
+    language: "en",
+    dir: "ltr",
+    path: "",
+    route: `/notes/drafts/${state.draftCounter}`,
+    tags: ["draft", "new note"],
+    summary: "A local draft note. Save stores this draft in your browser."
+  };
+
+  const source = `---
+title: Untitled Lecture Note
+course: New Note
+lecture: Draft ${state.draftCounter}
+lecturer: Amirali Saket
+language: en
+dir: ltr
+---
+
+# Untitled Lecture Note
+
+Start writing your lecture note here.
+
+::: theorem
+Every well-structured note begins with a precise statement.
+:::
+
+$$
+\\int_a^b f(x)\\,dx
+$$
+`;
+
+  state.manifest = [draftNote, ...state.manifest];
+  state.noteBodies.set(draftNote.id, source);
+  renderNoteList();
+  rewriteStaticNoteLinks();
+  navigateToNote(draftNote.id, true).then(() => setEditorVisibility(true));
+}
+
 function rewriteStaticNoteLinks() {
   document.querySelectorAll("[data-note-link]").forEach((link) => {
     const note = state.manifest.find((item) => item.id === link.dataset.noteLink);
@@ -293,6 +342,7 @@ async function loadNote(id, shouldScroll = false) {
 
 async function getNoteSource(note) {
   if (state.noteBodies.has(note.id)) return state.noteBodies.get(note.id);
+  if (!note.path) throw new Error("Draft note has no source path.");
   const response = await fetch(assetUrl(note.path));
   if (!response.ok) throw new Error(`Note request failed: ${response.status}`);
   const source = await response.text();
@@ -351,23 +401,9 @@ function setEditorVisibility(isVisible) {
   }
 }
 
-async function toggleNoteFullscreen() {
+function toggleNoteFullscreen() {
   if (!dynamicNote || !fullscreenToggle) return;
-
-  if (document.fullscreenElement === dynamicNote) {
-    await document.exitFullscreen();
-    return;
-  }
-
-  if (document.fullscreenElement) {
-    await document.exitFullscreen();
-  }
-
-  try {
-    await dynamicNote.requestFullscreen();
-  } catch (error) {
-    setNoteFullscreen(!dynamicNote.classList.contains("is-fullscreen"));
-  }
+  setNoteFullscreen(!dynamicNote.classList.contains("is-fullscreen"));
 }
 
 function setNoteFullscreen(isFullscreen) {
@@ -379,7 +415,8 @@ function setNoteFullscreen(isFullscreen) {
 }
 
 function syncFullscreenState() {
-  setNoteFullscreen(document.fullscreenElement === dynamicNote);
+  if (document.fullscreenElement !== dynamicNote) return;
+  setNoteFullscreen(true);
 }
 
 function updatePreviewFromEditor() {
@@ -611,6 +648,7 @@ document.addEventListener("click", (event) => {
   const recentSearch = event.target.closest(".recent-searches button");
   const searchResult = event.target.closest(".search-result");
   const noteLink = event.target.closest("[data-note-link]");
+  const fullscreenButton = event.target.closest("[data-fullscreen-toggle]");
 
   if (searchOpen) openSearch();
   if (searchClose || (searchModal && event.target === searchModal)) closeSearch();
@@ -618,6 +656,11 @@ document.addEventListener("click", (event) => {
   if (mobileBackdrop && event.target === mobileBackdrop) closeSidebar();
   if (sidebarToggle && sidebar) sidebar.classList.toggle("is-collapsed");
   if (themeToggle) setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+  if (fullscreenButton) {
+    event.preventDefault();
+    toggleNoteFullscreen();
+    return;
+  }
 
   if (recentSearch) {
     if (!searchInput) return;
@@ -641,7 +684,7 @@ document.addEventListener("click", (event) => {
     setEditorVisibility(!state.editMode);
   }
 
-  if (event.target.closest("[data-fullscreen-toggle]")) toggleNoteFullscreen();
+  if (event.target.closest("[data-add-note]")) createNewNoteDraft();
   if (event.target.closest("[data-save-note]")) saveActiveNote();
   if (event.target.closest("[data-reset-note]")) resetActiveNote();
 });

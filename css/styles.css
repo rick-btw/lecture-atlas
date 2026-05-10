@@ -957,7 +957,8 @@ pre code {
   backdrop-filter: blur(18px);
 }
 
-.note-library p,
+.note-library > p,
+.note-library-head p,
 .preview-pane > p,
 .editor-pane label {
   margin: 0 0 12px;
@@ -966,6 +967,25 @@ pre code {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.note-library-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-block-end: 12px;
+}
+
+.note-library-head p {
+  margin: 0;
+}
+
+.add-note-button {
+  min-width: 0;
+  min-height: 32px;
+  padding-inline: 10px;
+  font-size: 12px;
 }
 
 .note-list {
@@ -1078,6 +1098,10 @@ body.note-focus-active {
   backdrop-filter: blur(18px) saturate(1.08);
 }
 
+.note-reader {
+  container-type: inline-size;
+}
+
 .lecture-note + .lecture-note {
   margin-block-start: 22px;
 }
@@ -1086,10 +1110,16 @@ body.note-focus-active {
   display: flex;
   align-items: start;
   justify-content: space-between;
-  gap: 22px;
+  gap: 16px;
+  min-width: 0;
   padding-block-end: 24px;
   margin-block-end: 26px;
   border-block-end: 1px solid var(--line);
+}
+
+.note-title > div:first-child {
+  flex: 1 1 260px;
+  min-width: 0;
 }
 
 .note-title p {
@@ -1127,16 +1157,37 @@ body.note-focus-active {
 
 .note-actions {
   display: flex;
-  flex: 0 0 auto;
+  flex: 0 1 310px;
+  min-width: 0;
+  max-width: 100%;
   align-items: center;
   justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .note-actions .segmented {
   min-width: 0;
-  padding-inline: 12px;
+  min-height: 34px;
+  padding-inline: 10px;
+}
+
+.note-actions .segmented.active {
+  background: var(--bg-elevated);
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.note-actions a {
+  max-width: 100%;
+  min-height: 34px;
+  padding: 6px 10px;
+}
+
+@container (max-width: 560px) {
+  .note-actions {
+    flex-basis: 100%;
+  }
 }
 
 .lecture-note h3 {
