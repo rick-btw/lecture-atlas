@@ -68,12 +68,8 @@ function initTheme() {
 function updateScrollState() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   const value = max > 0 ? (window.scrollY / max) * 100 : 0;
-  const archive = document.querySelector("#archive");
   if (progress) progress.style.width = `${value}%`;
   if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
-  if (sidebar && archive) {
-    sidebar.classList.toggle("is-visible", window.scrollY + 140 > archive.offsetTop);
-  }
 }
 
 function openSidebar() {

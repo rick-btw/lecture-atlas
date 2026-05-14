@@ -313,12 +313,12 @@ svg {
 }
 
 .sidebar {
-  position: fixed;
-  inset-block-start: calc(var(--header-h) + 14px);
-  inset-inline-start: max(18px, calc((100vw - 1280px) / 2 + 18px));
-  z-index: 90;
-  width: var(--sidebar-w);
-  max-height: calc(100vh - var(--header-h) - 30px);
+  position: sticky;
+  inset-block-start: calc(var(--header-h) + 22px);
+  z-index: 20;
+  align-self: start;
+  width: 100%;
+  max-height: calc(100vh - var(--header-h) - 44px);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--bg-elevated);
@@ -326,12 +326,6 @@ svg {
   backdrop-filter: blur(24px) saturate(1.12);
   overflow: hidden;
   transition: transform 260ms var(--ease), width 260ms var(--ease), opacity 260ms var(--ease);
-}
-
-.sidebar:not(.is-visible):not(.is-open) {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(calc(-100% - 24px));
 }
 
 .sidebar.is-collapsed {
@@ -363,18 +357,51 @@ svg {
 }
 
 .sidebar-scroll {
-  max-height: calc(100vh - var(--header-h) - 90px);
+  max-height: calc(100vh - var(--header-h) - 102px);
   overflow: auto;
   padding: 16px;
   transition: opacity 180ms var(--ease);
+}
+
+.atlas-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-block-end: 18px;
+}
+
+.atlas-overview div {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+.atlas-overview strong,
+.atlas-overview span {
+  display: block;
+}
+
+.atlas-overview strong {
+  color: var(--ink);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.atlas-overview span {
+  margin-block-start: 5px;
+  color: var(--subtle);
+  font-size: 10px;
+  font-weight: 750;
+  line-height: 1.25;
 }
 
 .nav-group + .nav-group {
   margin-block-start: 24px;
 }
 
-.nav-group h2,
-.toc-card p {
+.nav-group h2 {
   margin: 0 0 10px;
   color: var(--subtle);
   font-size: 11px;
@@ -443,6 +470,16 @@ svg {
 .nav-group details a {
   margin-inline-start: 10px;
   justify-content: flex-start;
+}
+
+.atlas-map .nav-group details .nav-item {
+  justify-content: space-between;
+}
+
+.atlas-map .note-list {
+  max-height: min(420px, 42vh);
+  overflow: auto;
+  padding-inline-end: 2px;
 }
 
 .credit-card {
@@ -900,35 +937,15 @@ pre code {
 
 .archive-layout {
   display: grid;
-  grid-template-columns: 210px minmax(0, 820px);
-  gap: 44px;
+  grid-template-columns: minmax(250px, var(--sidebar-w)) minmax(0, 840px);
+  gap: 34px;
   align-items: start;
   justify-content: center;
 }
 
-.toc-card {
-  position: sticky;
-  inset-block-start: calc(var(--header-h) + 22px);
-  display: grid;
-  gap: 4px;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--bg-elevated);
-  backdrop-filter: blur(18px);
-}
-
-.toc-card a {
-  padding: 7px 0;
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 650;
-  transition: color 180ms var(--ease), transform 180ms var(--ease);
-}
-
-.toc-card a:hover {
-  color: var(--brand);
-  transform: translateX(3px);
+.archive-layout .reader {
+  grid-column: 2;
+  min-width: 0;
 }
 
 .reader-header {
@@ -940,24 +957,9 @@ pre code {
 }
 
 .note-system {
-  display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
+  min-width: 0;
 }
 
-.note-library {
-  position: sticky;
-  inset-block-start: calc(var(--header-h) + 22px);
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: var(--bg-elevated);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(18px);
-}
-
-.note-library > p,
 .note-library-head p,
 .preview-pane > p,
 .editor-pane label {
@@ -1063,9 +1065,7 @@ body.note-focus-active {
 
 body.note-focus-active .site-header,
 body.note-focus-active .sidebar,
-body.note-focus-active .toc-card,
 body.note-focus-active .reader-header,
-body.note-focus-active .note-library,
 body.note-focus-active .site-footer {
   opacity: 0;
   pointer-events: none;
@@ -1644,6 +1644,12 @@ body.note-focus-active .note-system {
 
 @media (max-width: 1180px) {
   .sidebar {
+    position: fixed;
+    inset-block-start: calc(var(--header-h) + 12px);
+    inset-inline-start: 12px;
+    z-index: 90;
+    width: min(360px, calc(100vw - 24px));
+    max-height: calc(100vh - var(--header-h) - 24px);
     transform: translateX(calc(-100% - 24px));
   }
 
@@ -1658,6 +1664,14 @@ body.note-focus-active .note-system {
   .topbar-links {
     display: none;
   }
+
+  .archive-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .archive-layout .reader {
+    grid-column: 1;
+  }
 }
 
 @media (max-width: 940px) {
@@ -1671,8 +1685,7 @@ body.note-focus-active .note-system {
   }
 
   .hero-grid,
-  .two-column,
-  .archive-layout {
+  .two-column {
     grid-template-columns: 1fr;
   }
 
@@ -1688,31 +1701,13 @@ body.note-focus-active .note-system {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .toc-card {
-    position: static;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .toc-card p {
-    grid-column: 1 / -1;
-  }
-
   .reader-header {
     align-items: start;
     flex-direction: column;
   }
 
-  .note-system,
   .note-editor-shell {
     grid-template-columns: 1fr;
-  }
-
-  .note-library {
-    position: static;
-  }
-
-  .note-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .editor-pane textarea {
@@ -1789,10 +1784,6 @@ body.note-focus-active .note-system {
     gap: 4px;
   }
 
-  .toc-card {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .lecture-note {
     border-radius: 18px;
     padding: 22px;
@@ -1805,10 +1796,6 @@ body.note-focus-active .note-system {
   .note-title a,
   .note-actions {
     align-self: flex-start;
-  }
-
-  .note-list {
-    grid-template-columns: 1fr;
   }
 
   .note-actions {
