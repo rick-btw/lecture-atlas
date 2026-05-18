@@ -20,7 +20,7 @@
 
     <header class="site-header" data-header>
       <nav class="topbar" aria-label="Primary navigation">
-        <a class="brand" href="#home" aria-label="Lecture Atlas home">
+        <a class="brand" href="#home" data-site-link="home" aria-label="Lecture Atlas home">
           <span class="brand-mark university-mark">
             <img src="assets/sbu-logo.svg" alt="" aria-hidden="true">
           </span>
@@ -31,10 +31,9 @@
         </a>
 
         <div class="topbar-links">
-          <a href="#courses">Courses</a>
-          <a href="#archive">Archive</a>
-          <a href="#reader">Reader</a>
-          <a href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">فارسی</a>
+          <a href="#courses" data-site-link="courses">Courses</a>
+          <a href="library/" data-site-link="library">Library</a>
+          <a href="#archive" data-site-link="archive">Archive</a>
         </div>
 
         <div class="topbar-actions">
@@ -267,8 +266,8 @@
 
               <section class="nav-group">
                 <h2>Jump To</h2>
-                <a class="nav-pill" href="#courses">Featured courses</a>
-                <a class="nav-pill" href="#recent">Recent uploads</a>
+                <a class="nav-pill" href="#courses" data-site-link="courses">Featured courses</a>
+                <a class="nav-pill" href="#recent" data-site-link="recent">Recent uploads</a>
                 <a class="nav-pill" href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">Persian note</a>
               </section>
 

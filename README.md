@@ -1,6 +1,6 @@
 # Lecture Atlas
 
-A polished static web platform for publishing interactive university math notes. Lecture Atlas presents course material as a bilingual academic archive with rendered mathematical notation, searchable note metadata, clean routes, dark mode, and an in-browser note reader/editor experience.
+A polished static web platform for publishing interactive university math notes. Lecture Atlas presents course material as a bilingual academic archive with rendered mathematical notation, searchable note metadata, clean routes, dark mode, and an in-browser Library editing experience.
 
 ## Features
 
@@ -9,7 +9,7 @@ A polished static web platform for publishing interactive university math notes.
 - KaTeX rendering for inline and display mathematics
 - Search across note metadata and loaded note bodies
 - Bilingual layout support with LTR and RTL notes
-- Reader controls for English and Persian note collections
+- Dedicated Library page for distraction-free note viewing and local editing
 - Light/dark theme toggle with local preference storage
 - Local note editing preview with changes saved in `localStorage`
 - Clean note URLs through small redirect pages under each note folder

@@ -247,7 +247,8 @@ svg {
   transition: background 180ms var(--ease), color 180ms var(--ease);
 }
 
-.topbar-links a:hover {
+.topbar-links a:hover,
+.topbar-links a.active {
   background: var(--surface-strong);
   color: var(--ink);
 }
@@ -954,6 +955,29 @@ pre code {
   justify-content: space-between;
   gap: 24px;
   margin-block-end: 26px;
+}
+
+.library-shell {
+  min-height: calc(100vh - var(--header-h));
+  padding-block: 24px 56px;
+}
+
+.library-layout {
+  width: min(1340px, calc(100% - 40px));
+  display: grid;
+  grid-template-columns: minmax(250px, var(--sidebar-w)) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.library-note-stage {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.library-note-stage .lecture-note {
+  min-height: calc(100vh - var(--header-h) - 104px);
+  margin-block-start: 0;
 }
 
 .note-system {
@@ -1665,11 +1689,13 @@ body.note-focus-active .note-system {
     display: none;
   }
 
-  .archive-layout {
+  .archive-layout,
+  .library-layout {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .archive-layout .reader {
+  .archive-layout .reader,
+  .library-note-stage {
     grid-column: 1;
   }
 }

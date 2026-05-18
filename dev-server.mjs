@@ -46,9 +46,11 @@ function serveFile(req, res) {
   const requestPath = pathInsideApp.endsWith("/")
     ? `${pathInsideApp}index.html`
     : pathInsideApp;
-  const filePath = safeFilePath(requestPath);
+  const filePath = [requestPath, `${requestPath}/index.html`]
+    .map((candidate) => safeFilePath(candidate))
+    .find((candidate) => candidate && existsSync(candidate) && statSync(candidate).isFile());
 
-  if (!filePath || !existsSync(filePath) || !statSync(filePath).isFile()) {
+  if (!filePath) {
     send(res, 404, "Not found");
     return;
   }
