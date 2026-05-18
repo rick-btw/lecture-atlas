@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Lecture Atlas Library is a focused workspace for viewing and editing existing mathematical notes.">
+    <meta name="application-name" content="Lecture Atlas">
+    <title>Library · Lecture Atlas</title>
+    <link rel="icon" href="../assets/sbu-logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&family=Crimson+Pro:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+  </head>
+  <body class="library-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+    <header class="site-header" data-header>
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="../#home" data-site-link="home" aria-label="Lecture Atlas home">
+          <span class="brand-mark university-mark">
+            <img src="../assets/sbu-logo.svg" alt="" aria-hidden="true">
+          </span>
+          <span>
+            <strong>Lecture Atlas</strong>
+            <small>SBU Faculty of Mathematical Sciences</small>
+          </span>
+        </a>
+
+        <div class="topbar-links">
+          <a href="../#courses" data-site-link="courses">Courses</a>
+          <a class="active" href="./" data-site-link="library" aria-current="page">Library</a>
+          <a href="../#archive" data-site-link="archive">Archive</a>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="icon-button search-trigger" type="button" data-search-open aria-label="Open search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.2-4.2m1.2-5.3a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"></path></svg>
+            <span class="shortcut">⌘K</span>
+          </button>
+          <button class="icon-button" type="button" data-theme-toggle aria-label="Toggle dark mode">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4V2m0 20v-2m8-8h2M2 12h2m14.36-6.36 1.42-1.42M4.22 19.78l1.42-1.42m12.72 0 1.42 1.42M4.22 4.22l1.42 1.42M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"></path></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.8 8.8 0 1 0 11 11Z"></path></svg>
+          </button>
+          <button class="icon-button mobile-menu-button" type="button" data-mobile-open aria-label="Open navigation">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mobile-backdrop" data-mobile-backdrop></div>
+
+    <main id="main">
+      <section id="library" class="library-shell">
+        <div class="container library-layout">
+          <aside class="sidebar atlas-map" data-sidebar aria-label="Atlas Map">
+            <div class="sidebar-header">
+              <button class="icon-button" type="button" data-sidebar-toggle aria-label="Collapse Atlas Map">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+              </button>
+              <span>Atlas Map</span>
+            </div>
+
+            <div class="sidebar-scroll">
+              <section class="atlas-overview" aria-label="Current archive statistics">
+                <div>
+                  <strong>4</strong>
+                  <span>Published notes</span>
+                </div>
+                <div>
+                  <strong>3</strong>
+                  <span>Subjects</span>
+                </div>
+                <div>
+                  <strong>2</strong>
+                  <span>Languages</span>
+                </div>
+              </section>
+
+              <section class="nav-group atlas-library" aria-label="Note library">
+                <div class="note-library-head">
+                  <p>Note Library</p>
+                </div>
+                <div class="note-list" data-note-list>
+                  <div class="skeleton"></div>
+                  <div class="skeleton"></div>
+                  <div class="skeleton"></div>
+                </div>
+              </section>
+
+              <section class="nav-group">
+                <h2>Courses</h2>
+                <details open>
+                  <summary>Published Subjects</summary>
+                  <a class="nav-item" href="/notes/analysis/uniform-convergence" data-note-link="analysis-uniform-convergence"><span>Analysis</span><small>1</small></a>
+                  <a class="nav-item" href="/notes/calculus/lecture-1" data-note-link="calculus-lecture-1"><span>Calculus I</span><small>2</small></a>
+                  <a class="nav-item" href="/notes/linear-algebra/spectral-theorem" data-note-link="linear-algebra-spectral-theorem"><span>Linear Algebra</span><small>1</small></a>
+                </details>
+              </section>
+
+              <section class="nav-group">
+                <h2>Jump To</h2>
+                <a class="nav-pill" href="../#courses" data-site-link="courses">Featured courses</a>
+                <a class="nav-pill" href="../#recent" data-site-link="recent">Recent uploads</a>
+                <a class="nav-pill" href="/notes/calculus/integrals-fa" data-note-link="calculus-integrals-fa">Persian note</a>
+              </section>
+
+              <section class="nav-group archive-credit" aria-label="Archive credit">
+                <h2>Studio</h2>
+                <div class="credit-card">
+                  <img src="../assets/sbu-logo.svg" alt="" aria-hidden="true">
+                  <span>
+                    <strong>Amirali Saket</strong>
+                    <small>Academic archive design</small>
+                  </span>
+                </div>
+              </section>
+            </div>
+          </aside>
+
+          <section class="library-note-stage" aria-label="Selected note">
+            <div class="note-system" data-note-system>
+              <article id="dynamic-note" class="lecture-note note-reader" data-dynamic-note data-note>
+                <header class="note-title">
+                  <div>
+                    <p data-note-meta>Loading note...</p>
+                    <h2 data-note-title>Mathematical lecture note</h2>
+                  </div>
+                  <div class="note-actions">
+                    <button class="segmented" type="button" data-edit-toggle>Edit Note</button>
+                    <button class="segmented" type="button" data-fullscreen-toggle>Fullscreen</button>
+                    <button class="segmented" type="button" data-save-note hidden>Save</button>
+                    <button class="segmented" type="button" data-reset-note hidden>Reset</button>
+                    <a data-note-route href="/notes/analysis/uniform-convergence">Open route</a>
+                  </div>
+                </header>
+
+                <p class="lead" data-note-summary>Loading LaTeX-powered academic content from the notes folder.</p>
+
+                <div class="note-editor-shell" data-editor-shell hidden>
+                  <div class="editor-pane">
+                    <label for="noteEditor">Markdown + LaTeX source</label>
+                    <textarea id="noteEditor" data-note-editor spellcheck="false"></textarea>
+                  </div>
+                  <div class="preview-pane">
+                    <p>Live Preview</p>
+                    <div class="note-content" data-note-preview></div>
+                  </div>
+                </div>
+
+                <div class="note-content" data-note-content aria-live="polite"></div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div class="search-modal" data-search-modal aria-hidden="true">
+      <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+        <div class="search-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.2-4.2m1.2-5.3a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"></path></svg>
+          <input id="searchInput" type="search" placeholder="Search courses, lectures, theorems..." autocomplete="off">
+          <button type="button" data-search-close aria-label="Close search">Esc</button>
+        </div>
+        <h2 id="searchTitle">Search Lecture Atlas</h2>
+        <div class="recent-searches" aria-label="Recent searches">
+          <button type="button">compactness</button>
+          <button type="button">eigenvalues</button>
+          <button type="button">انتگرال</button>
+        </div>
+        <div class="search-results" data-search-results></div>
+      </div>
+    </div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script defer src="../js/main.js"></script>
+  </body>
+</html>

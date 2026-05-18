@@ -6,6 +6,7 @@ const mobileBackdrop = document.querySelector("[data-mobile-backdrop]");
 const searchModal = document.querySelector("[data-search-modal]");
 const searchInput = document.querySelector("#searchInput");
 const searchResults = document.querySelector("[data-search-results]");
+const siteLinks = document.querySelectorAll("[data-site-link]");
 const noteSystem = document.querySelector("[data-note-system]");
 const noteList = document.querySelector("[data-note-list]");
 const dynamicNote = document.querySelector("[data-dynamic-note]");
@@ -127,12 +128,19 @@ function renderResults(query = "") {
 
   searchResults.innerHTML = matches
     .map((item) => `
-      <a class="search-result" href="${item.href}" data-note-link="${item.id || ""}">
+      <a class="search-result" href="${resultHref(item.href)}" data-note-link="${item.id || ""}">
         <strong>${escapeHtml(item.title)}</strong>
         <span>${escapeHtml(item.meta)}</span>
       </a>
     `)
     .join("");
+}
+
+function resultHref(href) {
+  if (href.startsWith("#")) {
+    return new URL(href, `${window.location.origin}${appBasePath}`).toString();
+  }
+  return href;
 }
 
 function setReaderDirection(direction) {
@@ -142,6 +150,23 @@ function setReaderDirection(direction) {
 
   const note = state.manifest.find((item) => direction === "rtl" ? item.dir === "rtl" : item.dir !== "rtl");
   if (note) navigateToNote(note.id, true);
+}
+
+function rewriteSiteLinks() {
+  const destinations = {
+    home: "",
+    courses: "#courses",
+    recent: "#recent",
+    archive: "#archive",
+    library: "library/"
+  };
+
+  siteLinks.forEach((link) => {
+    const destination = destinations[link.dataset.siteLink];
+    if (destination !== undefined) {
+      link.href = new URL(destination, `${window.location.origin}${appBasePath}`).toString();
+    }
+  });
 }
 
 function initRevealAnimations() {
@@ -292,7 +317,7 @@ async function loadInitialNote() {
   const hashId = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("note");
   const routed = state.manifest.find((note) => normalizeRoute(note.route) === route);
   const byHash = state.manifest.find((note) => note.id === hashId);
-  await loadNote((routed || byHash || state.manifest[0])?.id, false);
+  await loadNote((routed || byHash || state.manifest[0])?.id, Boolean(routed || byHash || pendingRoute));
 }
 
 async function navigateToNote(id, pushRoute = true) {
@@ -332,7 +357,7 @@ async function loadNote(id, shouldScroll = false) {
   updateActiveNoteChrome(note);
 
   if (shouldScroll) {
-    document.querySelector("#reader")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.querySelector("#library, #reader")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 
@@ -664,7 +689,7 @@ document.addEventListener("click", (event) => {
     renderResults(searchInput.value);
   }
 
-  if (noteLink?.dataset.noteLink) {
+  if (noteLink?.dataset.noteLink && !noteLink.matches("[data-note-route]")) {
     event.preventDefault();
     closeSearch();
     closeSidebar();
@@ -701,18 +726,18 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+searchInput?.addEventListener("input", () => renderResults(searchInput.value));
+noteEditor?.addEventListener("input", updatePreviewFromEditor);
 document.querySelectorAll("[data-dir-set]").forEach((button) => {
   button.addEventListener("click", () => setReaderDirection(button.dataset.dirSet));
 });
-
-searchInput?.addEventListener("input", () => renderResults(searchInput.value));
-noteEditor?.addEventListener("input", updatePreviewFromEditor);
 document.addEventListener("fullscreenchange", syncFullscreenState);
 window.addEventListener("popstate", () => loadInitialNote());
 window.addEventListener("scroll", updateScrollState, { passive: true });
 window.addEventListener("resize", updateScrollState);
 window.addEventListener("DOMContentLoaded", () => {
   initTheme();
+  rewriteSiteLinks();
   initRevealAnimations();
   updateScrollState();
   initNotes();
