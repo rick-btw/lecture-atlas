@@ -167,6 +167,14 @@ function rewriteSiteLinks() {
       link.href = new URL(destination, `${window.location.origin}${appBasePath}`).toString();
     }
   });
+
+  rewriteLibraryNoteLinks();
+}
+
+function rewriteLibraryNoteLinks() {
+  document.querySelectorAll("[data-library-note-link]").forEach((link) => {
+    link.href = libraryNoteUrl(link.dataset.libraryNoteLink);
+  });
 }
 
 function initRevealAnimations() {
@@ -200,20 +208,23 @@ function renderMath(target = document.body) {
 }
 
 async function initNotes() {
-  if (!noteSystem) return;
-
   try {
     const response = await fetch(assetUrl("notes/manifest.json"));
     if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
     state.manifest = await response.json();
-    renderNoteList();
     rewriteStaticNoteLinks();
+    rewriteLibraryNoteLinks();
     state.searchIndex = [...noteItemsForSearch(), ...staticArchiveItems];
     renderResults(searchInput?.value || "");
-    await loadInitialNote();
+
+    if (noteSystem) {
+      renderNoteList();
+      await loadInitialNote();
+    }
+
     hydrateSearchIndex();
   } catch (error) {
-    noteList.innerHTML = `<p class="note-status">Unable to load note manifest.</p>`;
+    if (noteList) noteList.innerHTML = `<p class="note-status">Unable to load note manifest.</p>`;
     if (noteContent) {
       noteContent.innerHTML = `<div class="academic-box warning"><strong>Warning.</strong> The dynamic notes could not be loaded from the notes folder.</div>`;
     }
@@ -225,7 +236,7 @@ function noteItemsForSearch() {
     id: note.id,
     title: note.title,
     meta: `${note.course} · ${note.lecture} · ${note.lecturer}`,
-    href: routeUrl(note.route),
+    href: libraryNoteUrl(note.id),
     terms: `${note.tags.join(" ")} ${note.summary}`
   }));
 }
@@ -638,6 +649,10 @@ function routeUrl(route) {
   return `${base}${cleanRoute}`;
 }
 
+function libraryNoteUrl(noteId) {
+  return new URL(`library/#note=${encodeURIComponent(noteId)}`, `${window.location.origin}${appBasePath}`).toString();
+}
+
 function routeFromPath(pathname) {
   const normalizedPath = normalizeRoute(pathname);
   const base = normalizeRoute(appBasePath);
@@ -689,7 +704,7 @@ document.addEventListener("click", (event) => {
     renderResults(searchInput.value);
   }
 
-  if (noteLink?.dataset.noteLink && !noteLink.matches("[data-note-route]")) {
+  if (noteLink?.dataset.noteLink && !noteLink.matches("[data-note-route]") && noteSystem) {
     event.preventDefault();
     closeSearch();
     closeSidebar();
