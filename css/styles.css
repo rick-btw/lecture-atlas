@@ -932,29 +932,111 @@ pre code {
   font-size: 16px;
 }
 
-.archive-shell {
+.note-preview-section {
   padding-block: 86px 120px;
 }
 
-.archive-layout {
+.note-preview-grid {
   display: grid;
-  grid-template-columns: minmax(250px, var(--sidebar-w)) minmax(0, 840px);
-  gap: 34px;
-  align-items: start;
-  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.archive-layout .reader {
-  grid-column: 2;
-  min-width: 0;
+.note-preview-card {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  min-height: 340px;
+  padding: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-solid) 94%, transparent), color-mix(in srgb, var(--surface) 82%, transparent)),
+    var(--bg-elevated);
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms var(--ease), border-color 180ms var(--ease), background 180ms var(--ease);
 }
 
-.reader-header {
+.note-preview-card::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand), var(--blue), var(--rose));
+}
+
+.note-preview-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+  background: var(--bg-solid);
+}
+
+.note-preview-kicker,
+.note-preview-card dt {
+  color: var(--subtle);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.note-preview-card h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+}
+
+.note-preview-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.note-preview-card dl {
+  display: grid;
+  gap: 10px;
+  margin: auto 0 0;
+}
+
+.note-preview-card dl div {
   display: flex;
-  align-items: end;
   justify-content: space-between;
-  gap: 24px;
-  margin-block-end: 26px;
+  gap: 16px;
+  padding-block-end: 8px;
+  border-block-end: 1px solid var(--line);
+}
+
+.note-preview-card dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+  text-align: end;
+}
+
+.note-preview-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+  color: var(--brand-strong);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.note-preview-action svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+[dir="rtl"].note-preview-card .note-preview-action svg {
+  transform: rotate(180deg);
 }
 
 .library-shell {
@@ -1689,12 +1771,10 @@ body.note-focus-active .note-system {
     display: none;
   }
 
-  .archive-layout,
   .library-layout {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .archive-layout .reader,
   .library-note-stage {
     grid-column: 1;
   }
@@ -1801,6 +1881,10 @@ body.note-focus-active .note-system {
     grid-template-columns: 1fr;
   }
 
+  .note-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
   .course-card {
     min-height: 0;
   }
@@ -1812,6 +1896,11 @@ body.note-focus-active .note-system {
 
   .lecture-note {
     border-radius: 18px;
+    padding: 22px;
+  }
+
+  .note-preview-card {
+    min-height: 0;
     padding: 22px;
   }
 
